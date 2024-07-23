@@ -1,0 +1,187 @@
+paths:
+  /api/cart/add:
+    post:
+      summary: Agrega un producto al carrito.
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: string
+                  description: ID del producto.
+                quantity:
+                  type: integer
+                  description: Cantidad del producto.
+      responses:
+        "201":
+          description: Producto agregado correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "400":
+          description: Datos no válidos.
+        "500":
+          description: Error inesperado en el servidor.
+
+  /api/cart/:
+    get:
+      summary: Obtiene el carrito del usuario.
+      tags:
+        - Cart
+      responses:
+        "200":
+          description: Carrito obtenido correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "404":
+          description: No se encontró un carrito para el usuario.
+        "500":
+          description: Error inesperado en el servidor.
+
+  /api/cart/remove/{productId}:
+    put:
+      summary: Elimina un producto del carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+      responses:
+        "201":
+          description: Producto eliminado correctamente del carrito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "404":
+          description: No se encontró el producto en el carrito.
+        "500":
+          description: Error inesperado en el servidor.
+
+  /api/cart/{productId}/{quantity}:
+    delete:
+      summary: Elimina una cantidad específica de un producto del carrito.
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+        - in: path
+          name: quantity
+          schema:
+            type: integer
+            required: true
+            description: Cantidad a eliminar.
+      responses:
+        "201":
+          description: Cantidad modificada correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "404":
+          description: No se encontró el producto en el carrito.
+        "500":
+          description: Error inesperado en el servidor.
+
+  /api/cart/purchase:
+    post:
+      summary: Realiza la compra de los productos en el carrito.
+      tags:
+        - Cart
+      responses:
+        "201":
+          description: Orden de compra generada correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        "400":
+          description: No hay productos para comprar.
+        "500":
+          description: Error inesperado en el servidor.
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID autogenerado del carrito.
+        user:
+          type: string
+          description: ID del usuario dueño del carrito.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto.
+              quantity:
+                type: integer
+                description: Cantidad del producto.
+      required:
+        - user
+        - items
+
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID autogenerado de la orden.
+        customer:
+          type: string
+          description: ID del cliente.
+        email:
+          type: string
+          description: Correo electrónico del cliente.
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto.
+              quantity:
+                type: integer
+                description: Cantidad del producto.
+              price:
+                type: number
+                description: Precio del producto.
+              total:
+                type: number
+                description: Precio total del producto.
+        total:
+          type: number
+          description: Precio total de la orden.
+        date:
+          type: string
+          format: date-time
+          description: Fecha de la orden.
+      required:
+        - customer
+        - email
+        - products
+        - total
+        - date

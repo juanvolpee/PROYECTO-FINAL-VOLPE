@@ -1,0 +1,314 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtiene la lista de productos.
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+          description: Cantidad máxima de productos a retornar por página.
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: Número de página.
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Orden de los productos (ascendente o descendente) basado en el precio.
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Categoría de los productos a filtrar.
+        - in: query
+          name: stock
+          schema:
+            type: integer
+            minimum: 0
+          description: Cantidad mínima de stock de los productos a filtrar.
+        - in: query
+          name: startDate
+          schema:
+            type: string
+            format: date
+          description: Fecha de inicio para filtrar los productos por fecha de creación.
+        - in: query
+          name: endDate
+          schema:
+            type: string
+            format: date
+          description: Fecha de fin para filtrar los productos por fecha de creación.
+      responses:
+        "200":
+          description: La operación fue exitosa. Retorna la lista de productos.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  totalPages:
+                    type: integer
+                  prevPage:
+                    type: integer
+                  nextPage:
+                    type: integer
+                  page:
+                    type: integer
+                  hasPrevPage:
+                    type: boolean
+                  hasNextPage:
+                    type: boolean
+                  prevLink:
+                    type: string
+                  nextLink:
+                    type: string
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: No se encontraron productos para mostrar.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/products/favoritos/{productId}:
+    post:
+      summary: Agrega o remueve un producto de favoritos.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+      responses:
+        "200":
+          description: La operación fue exitosa. Retorna los datos del usuario actualizado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "403":
+          description: El producto no pertenece al usuario o no tiene privilegios para realizar la operación.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/products/register/:
+    post:
+      summary: Registra un nuevo producto.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                stock:
+                  type: integer
+                  minimum: 0
+                price:
+                  type: number
+                  minimum: 0
+                pcode:
+                  type: string
+                category:
+                  type: string
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        "201":
+          description: Producto registrado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "409":
+          description: Ya existe un producto con ese Product code.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/products/{id}:
+    get:
+      summary: Obtiene un producto por su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+      responses:
+        "200":
+          description: La operación fue exitosa. Retorna los datos del producto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: No se encontró un producto con ese ID.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+    delete:
+      summary: Elimina un producto por su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+      responses:
+        "201":
+          description: Producto eliminado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: No se encontró un producto con ese ID.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/products/edit/{productId}:
+    put:
+      summary: Edita un producto por su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        "201":
+          description: Producto editado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/products/valoration/{productId}:
+    post:
+      summary: Agrega una valoración a un producto.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                star:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+      responses:
+        "201":
+          description: Valoración agregada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  star:
+                    type: integer
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID autogenerado del producto.
+        title:
+          type: string
+          description: Título del producto.
+        description:
+          type: string
+          description: Descripción del producto.
+        stock:
+          type: integer
+          description: Cantidad en stock del producto.
+        price:
+          type: number
+          format: float
+          description: Precio del producto.
+        pcode:
+          type: string
+          description: Código del producto.
+        category:
+          type: string
+          description: Categoría del producto.
+        createdAt:
+          type: string
+          format: date-time
+          description: Fecha de creación del producto.
+        img:
+          type: array
+          items:
+            type: string
+          description: Lista de imágenes del producto.
+        owner:
+          type: string
+          description: Propietario del producto.

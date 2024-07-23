@@ -1,0 +1,256 @@
+openapi: 3.0.0
+info:
+  title: Documentación de la API de Usuarios
+  version: 1.0.0
+  description: Documentación de la API de Usuarios para gestionar usuarios, inicio de sesión y más.
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor de desarrollo
+
+paths:
+  /api/users/:
+    get:
+      summary: Obtiene todos los usuarios disponibles en la aplicación.
+      tags:
+        - Users
+      responses:
+        "200":
+          description: La operación fue exitosa. Retorna un arreglo con los usuarios.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/users/{uid}:
+    get:
+      summary: Obtiene un usuario por id disponible en la aplicación.
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario que se desea solicitar.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: La operación fue exitosa. Retorna un usuario.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/users/login/:
+    post:
+      summary: Inicio de sesión de usuario.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        "200":
+          description: Inicio de sesión exitoso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/users/register/:
+    post:
+      summary: Registro de usuario.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                age:
+                  type: number
+                role:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - first_name
+                - last_name
+                - age
+                - email
+                - password
+      responses:
+        "201":
+          description: Usuario registrado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/users/profile/edit:
+    post:
+      summary: Editar perfil de usuario.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                age:
+                  type: number
+                role:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - first_name
+                - last_name
+                - age
+                - email
+                - password
+      responses:
+        "201":
+          description: Perfil de usuario editado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/users/request-password-reset:
+    post:
+      summary: Solicitar restablecimiento de contraseña.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+      responses:
+        "200":
+          description: La operación fue exitosa. Se envió un correo electrónico para restablecer la contraseña.
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+  /api/users/reset-password/{token}:
+    post:
+      summary: Restablecer contraseña.
+      tags:
+        - Users
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: Token de restablecimiento de contraseña.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newPassword:
+                  type: string
+              required:
+                - newPassword
+      responses:
+        "200":
+          description: Contraseña actualizada con éxito.
+        "400":
+          description: Se envió un dato no esperado.
+        "404":
+          description: El enlace ha expirado o es inválido.
+        "500":
+          description: Error inesperado en el servidor, no se puede manejar el proceso.
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID autogenerado de MongoDB.
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        age:
+          type: integer
+          description: Edad del usuario.
+        email:
+          type: string
+          description: Email del usuario.
+        password:
+          type: string
+          description: Contraseña del usuario.
+      example:
+        _id: "655eacde18d63f2d8e18f8c5"
+        first_name: "Usuario de prueba 1"
+        last_name: "Apellido de prueba 1"
+        age: 28
+        email: "correodeprueba1@gmail.com"
+        password: "$2b$10$jo8EM4kblYt2BXI5t12OsScO6fTAgjlMFxLJVAnWO6xn4tmd7T2"

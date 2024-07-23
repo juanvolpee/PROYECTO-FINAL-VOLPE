@@ -1,0 +1,939 @@
+{
+	"info": {
+		"_postman_id": "f15e6f1f-1af8-4d92-973c-3380c6c8efae",
+		"name": "Entrega Clase 30",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25729757"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Bernardo\",\r\n    \"last_name\": \"Dieta\",\r\n    \"age\": 37,\r\n    \"email\": \"bernardodieta@gmail.com\",\r\n    \"password\": \"123123\"\r\n    \r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/662c27e92845f4e43b13b3ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"662c27e92845f4e43b13b3ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"email\":\"bernardodieta@gmail.com\",\r\n    \"password\":\"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProfile",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "UserUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userUpdate\": {\r\n        \"first_name\": \"Mario\",\r\n        \"last_name\": \"Juarez\",\r\n        \"age\": 43,        \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/profile/edit/663e7bcc7787ad7d43432f04",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"edit",
+								"663e7bcc7787ad7d43432f04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"bernardodieta@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/request-password-reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"request-password-reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changepassword",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeRole",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userUpdate\": {\r\n        \"role\": \"admin\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/profile/edit/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								"edit",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "uploadDocuments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/Users/bdiet/Desktop/PDF/Show Screen UI App Safe in The Box.pdf",
+										"/C:/Users/bdiet/Desktop/PDF/Show Screen UI App Safe in The Box 2.pdf",
+										"/E:/Escritorio 02-07-2023/pdf/Aereo Pablo Agustin Escontrela.pdf",
+										"/E:/Escritorio 02-07-2023/pdf/Aereo Pablo Agustin Escontrela - copia.pdf"
+									]
+								},
+								{
+									"key": "document_names",
+									"value": "Comprobante de direccion",
+									"type": "text"
+								},
+								{
+									"key": "document_names",
+									"value": "DNI",
+									"type": "text"
+								},
+								{
+									"key": "document_names",
+									"value": "Estado de cuenta",
+									"type": "text"
+								},
+								{
+									"key": "document_names",
+									"value": "asd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/documents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePremiumUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/premium",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"premium"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GetAllProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/?page=1&limit=15&sort=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "15"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaveProducts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "img",
+									"type": "file",
+									"src": [
+										"/C:/Users/bdiet/Desktop/Productos/D_NQ_NP_639328-CBT73940576920_012024-O.webp",
+										"/C:/Users/bdiet/Desktop/Productos/D_NQ_NP_828754-CBT74049857163_012024-O.webp"
+									]
+								},
+								{
+									"key": "title",
+									"value": "2pcs Cámara De Seguridad Wifi De 360° Visión Nocturna Alarma",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "35",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "292",
+									"type": "text"
+								},
+								{
+									"key": "pcode",
+									"value": "CM012",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Cámaras de seguridad",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Nota: Si necesita manual de instrucciones en español, no dude en ponerse en contacto con nosotros!!!\nWiFi: 2,4 GHz\nApp:YI IoT\n\nHola estimado cliente, no presente quejas a voluntad, si tiene alguna pregunta, puede comunicarse conmigo, podemos resolver el problema por usted, si no podemos resolverlo, le daremos un reembolso completo.\n\n\ncaracterística:\n1. Función: el cabezal de la lámpara es un cabezal de lámpara E27 general, que es fácil de instalar, admite iluminación de doble luz, ángulo de rotación y traducción de 360 grados, visualización remota del móvil, conexión wifi, detección inteligente del movimiento humano pantalla y alarma anormal, detecta a alguien que entre a la cámara y enciende automáticamente la alarma, intercomunicador de voz bidireccional inteligente en tiempo real, admite tarjeta de memoria de hasta 64G, admite almacenamiento en nube y tarjeta TF de almacenamiento de datos.\n2 . Uso: utilizado para monitoreo de seguridad en el hogar, oficina, almacén, monitoreo de seguridad en tiendas.\n3. Personas aplicables: adecuado para todas las personas con necesidades de monitoreo de seguridad.\n4. Diseño de apariencia: simula la forma de una bombilla.\n5. La instalación es supersencilla, se puede utilizar la interfaz de enchufe de la lámpara E27 doméstica normal y la cámara de vigilancia inalámbrica real no tiene problemas de cableado\n\nEspecificación:\nColor del producto: blanco\nTamaño del producto: 15*6,5*6,5 cm\nEspecificaciones: Admite imagen infrarroja e iluminación con cuentas de lámpara LED\nInfrarrojo: solo hay imágenes infrarrojas en blanco y negro por la noche. Versión de lámpara doble: hay perlas de lámpara LED, la luz blanca se puede usar para iluminar y la pantalla a color se muestra después de encender la luz\nSensor: 1/3 de pulgada RGB 1080P CMOS\nLente: lente estándar de 3,6 mm\nResolución: 1080P (1920*1280) 720P (1280*720) Óptica\nÁngulo de giro/Inclinación panorámica\n: 355 Inclinación: 120 Mini sensibilidad: 0.02Lux\nLa visión nocturna por infrarrojos admite hasta 10 metros, y infrarrojo se enciende mediante una fotorresistencia automática\nTransmisión dual H.264 comprimida\nde vídeo Transmisión 1080P: 1,21,5 Mbps 720P: 512 Kbps\nFormato de audio\nG.711A Admite protocolos http, https, TCP, IPV4, IPV6, UDP, RTSP, ICMP, RTP, DHCP, ARP, DNS, QoS\nProtocolo WiFi IEEE 802.11b/g/n\nRotación de imagen/espejo inverso\nSoporte de control de vídeo\nSoporte de control de vídeo\nSoporte de voz Soporte de detección de movimiento\nSoporte de seguimiento automático\nde acción alarma Envío de alarma por correo electrónico/información de alarma en tiempo real\nCanal de audio Micrófono incorporado\nEl almacenamiento TF admite una tarjeta TF de hasta 64 G\nAlimentación E27 110-240 V\nConsumo de energía <5 W\n\nLista de productos:\n2* cámara,\n2* base,\n2* manual,\n2 paquete de accesorios de instalación\n\nTienda de posventa:\n1. Por favor, compruebe los productos durante el envío, si hay algún daño, acéptelo y póngase en contacto con nosotros de inmediato. Lo confirmaremos y le enviaremos una nueva confirmación;\n2. Si hay algún problema con el producto, muéstrenos la foto o el video y lo resolveremos por usted;\n3. Cualquier comentario de usted será muy apreciado. Si está satisfecho con nuestros servicios o productos, por favor denos 5 estrellas. Si tiene alguna pregunta, póngase en contacto con nosotros y nos pondremos en contacto con usted lo antes posible.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/6622bfaaf2f681557c978c95",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"6622bfaaf2f681557c978c95"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FilterByDate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products?startDate=2024-04-01&endDate=2024-04-30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2024-04-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-04-30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FilterByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products?category=Laptops Gamers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Laptops Gamers"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addToFavorite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/favoritos/662c27e92845f4e43b13b3ec/6629e6006ab8a367293436c2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"favoritos",
+								"662c27e92845f4e43b13b3ec",
+								"6629e6006ab8a367293436c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": {\r\n        \"price\": \"2580\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/edit/6629dfec6ab8a3672934369e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"edit",
+								"6629dfec6ab8a3672934369e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/664447c48be0cb9067cf13b9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"664447c48be0cb9067cf13b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valorar",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "AddProductTocart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"6629dfec6ab8a3672934369e\",\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cart/662c27e92845f4e43b13b3ec/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cart",
+								"662c27e92845f4e43b13b3ec",
+								"add"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "6622b07676d7173d20a2635a",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCartUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cart/662c27e92845f4e43b13b3ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cart",
+								"662c27e92845f4e43b13b3ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductFromCart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cart/66213dc25b15cdaf1e8aae0e/6622b07676d7173d20a2635a/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cart",
+								"66213dc25b15cdaf1e8aae0e",
+								"6622b07676d7173d20a2635a",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalPrice\": 52158,\r\n    \"email\": \"bernardodieta@gmail.com\",\r\n    \"products\": [\r\n        {\r\n            \"productId\": \"6629dfec6ab8a3672934369e\",\r\n            \"quantity\": 13\r\n        },\r\n        {\r\n            \"productId\": \"6629dfec6ab8a3672934369e\",\r\n            \"quantity\": 10\r\n        },\r\n          {\r\n            \"productId\": \"6629dfec6ab8a3672934369e\",\r\n            \"quantity\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cart/662c27e92845f4e43b13b3ec/purchase/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cart",
+								"662c27e92845f4e43b13b3ec",
+								"purchase",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cart/remove/662c27e92845f4e43b13b3ec/6629dfec6ab8a3672934369e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cart",
+								"remove",
+								"662c27e92845f4e43b13b3ec",
+								"6629dfec6ab8a3672934369e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sms And Email",
+			"item": [
+				{
+					"name": "EmailSend",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/com/email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"com",
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "GetAllOrdersByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/662c27e92845f4e43b13b3ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"662c27e92845f4e43b13b3ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ConfirmOrderDelivered",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/confirm/663195c2f990f0f473eda293",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"confirm",
+								"663195c2f990f0f473eda293"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelOrderPurchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/cancel/663195c2f990f0f473eda293",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"cancel",
+								"663195c2f990f0f473eda293"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addressData\": {\r\n        \"country\": \"Argentina\",\r\n        \"state\": \"Buenos Aires\",\r\n        \"city\": \"Pergamino \",\r\n        \"zipcode\": 2700,\r\n        \"address\": \"Gaucho Cruz\",\r\n        \"numExt\": 138\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/address/save/662c27e92845f4e43b13b3ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"address",
+								"save",
+								"662c27e92845f4e43b13b3ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PruebaApiGEONAMES",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api.geonames.org/postalCodeSearchJSON?postalcode=06500&maxRows=10&username=bdieta&country=MX",
+							"protocol": "http",
+							"host": [
+								"api",
+								"geonames",
+								"org"
+							],
+							"path": [
+								"postalCodeSearchJSON"
+							],
+							"query": [
+								{
+									"key": "postalcode",
+									"value": "06500"
+								},
+								{
+									"key": "maxRows",
+									"value": "10"
+								},
+								{
+									"key": "username",
+									"value": "bdieta"
+								},
+								{
+									"key": "country",
+									"value": "MX"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "GetAllQuestions",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "questions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/question/6629e6b66ab8a367293436cb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"question",
+								"6629e6b66ab8a367293436cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetQuestionByProductId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getQuestionbyProductIdAndUserId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getQuestionById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
